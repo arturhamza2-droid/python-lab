@@ -19,6 +19,18 @@ def test_calculate() -> None:
     assert response.json() == {"price": 100.0, "quantity": 2, "total": 200.0}
 
 
+def test_calculate_rejects_zero_price() -> None:
+    response = client.post("/calculate", json={"price": 0, "quantity": 2})
+
+    assert response.status_code == 422
+
+
+def test_calculate_rejects_negative_quantity() -> None:
+    response = client.post("/calculate", json={"price": 100, "quantity": -1})
+
+    assert response.status_code == 422
+
+
 def test_greet() -> None:
     response = client.get("/greet/Artur")
 

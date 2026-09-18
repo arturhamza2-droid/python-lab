@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from main import greet
 
@@ -7,8 +7,8 @@ app = FastAPI(title="Python Lab API")
 
 
 class CalculateRequest(BaseModel):
-    price: float
-    quantity: int
+    price: float = Field(gt=0)
+    quantity: int = Field(gt=0)
 
 
 @app.get("/")
