@@ -12,6 +12,13 @@ def test_root() -> None:
     assert response.json() == {"message": "Python Lab API работает"}
 
 
+def test_calculate() -> None:
+    response = client.post("/calculate", json={"price": 100, "quantity": 2})
+
+    assert response.status_code == 200
+    assert response.json() == {"price": 100.0, "quantity": 2, "total": 200.0}
+
+
 def test_greet() -> None:
     response = client.get("/greet/Artur")
 
